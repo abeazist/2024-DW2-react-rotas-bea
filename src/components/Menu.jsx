@@ -106,9 +106,16 @@ export function Menu() {
           UseRef
         </NavLink>
 
+
         <NavLink to="useEffect" className={getEstilo}>
           <IconMessageUp />
           UseEffect
+        </NavLink>
+
+        <span className="pt-4 pl-3 text-xs text-zinc-500">Tradutor</span>
+        <NavLink to="tradutor" className={getEstilo}>
+          <IconMessageUp />
+          Tradutor
         </NavLink>
       </nav>
     </aside>
