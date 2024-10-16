@@ -4,17 +4,24 @@ import { Pagina } from "../components/Pagina";
 export function Tradutor() {
   const [texto, setTexto] = useState("");
   const [traduzido, setTraduzido] = useState("");
+  const maxCaracteres = 250;  // Limite de caracteres
 
   const traduzir = () => {
     fetch(
       `https://api.mymemory.translated.net/get?q=${texto}&langpair=pt-br|it`
     )
-      .then((resposta) => resposta.json())
-      .then((dados) => setTraduzido(dados.responseData.translatedText)) // Converte a resposta para um objeto JSON
-      .catch((error) => {
-        alert("Erro ao traduzir dados:", error);
-      });
-    console.log(traduzido);
+    .then((resposta) => resposta.json())
+    .then((dados) => setTraduzido(dados.responseData.translatedText))
+    .catch((error) => {
+      alert("Erro ao traduzir dados:", error);
+    });
+  };
+
+  const contador = (evento) => {
+    const novoTexto = evento.target.value;
+    if (novoTexto.length <= maxCaracteres) {
+      setTexto(novoTexto);  // Atualiza o texto conforme o usuário digita
+    }
   };
 
   return (
@@ -24,16 +31,18 @@ export function Tradutor() {
         <div className="flex flex-col w-80 p-4 bg-gray-100 border rounded-md">
           <textarea
             value={texto}
-            onChange={(evento) => setTexto(evento.target.value)}
+            onChange={contador}  // função para atualizar o texto
             className="p-2 outline-none border border-gray-300 rounded-md h-36 text-black"
-            placeholder=""
-            maxLength="250"
+            maxLength={maxCaracteres}
+          
           />
-          <div className="flex justify-end mt-2">
-
+          <div className="flex justify-between mt-2">
+            <span className="text-gray-500 px-4 py-2 text-md">
+              {texto.length}/{maxCaracteres} {/* Contador de caracteres */}
+            </span>
             <button
               onClick={traduzir}
-              className="bg-orange-400 text-white px-4 py-2 rounded-md hover:bg-orange-500"
+              className="bg-blue-400 text-white px-4 py-2 rounded-md hover:bg-blue-500"
             >
               Traduzir
             </button>
@@ -44,9 +53,9 @@ export function Tradutor() {
         <div className="flex flex-col w-80 p-4 bg-gray-100 border rounded-md">
           <textarea
             value={traduzido}
-           
-            className="p-2 outline-none border border-gray-300 rounded-md h-36  text-black"
-            placeholder=""
+            readOnly
+            className="p-2 outline-none border border-gray-300 rounded-md h-36 text-black"
+            
           />
         </div>
       </div>
