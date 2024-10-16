@@ -19,30 +19,34 @@ export function Tradutor() {
 
   return (
     <Pagina titulo="Tradutor" subtitulo="página de Tradução">
-      <div className="flex col ">
-        <p>Português</p>
-        <div className="flex-row w-60 h-48 bg-white">
-          <input
+      <div className="flex flex-col items-center space-y-4 mt-8">
+        <p className="text-lg font-bold">Português</p>
+        <div className="flex flex-col w-80 p-4 bg-gray-100 border rounded-md">
+          <textarea
             value={texto}
             onChange={(evento) => setTexto(evento.target.value)}
-            type="text"
-            className=" flex-row outline-none text-black w-60 h-7"
+            className="p-2 outline-none border border-gray-300 rounded-md h-36 text-black"
+            placeholder=""
+            maxLength="250"
           />
-          <button
-            onClick={traduzir}
-            className="bg-orange-400 w-20 text-black rounded-md"
-          >
-            Traduzir
-          </button>
+          <div className="flex justify-end mt-2">
+
+            <button
+              onClick={traduzir}
+              className="bg-orange-400 text-white px-4 py-2 rounded-md hover:bg-orange-500"
+            >
+              Traduzir
+            </button>
+          </div>
         </div>
-        <br />
-        <p>Italiano</p>
-        <div className="flex-row w-60 h-48 bg-white">
-          <input
+
+        <p className="text-lg font-bold">Italiano</p>
+        <div className="flex flex-col w-80 p-4 bg-gray-100 border rounded-md">
+          <textarea
             value={traduzido}
-            type="text"
-            className=" flex-row outline-none text-black w-60 h-7"
-            // onChange={""}
+           
+            className="p-2 outline-none border border-gray-300 rounded-md h-36  text-black"
+            placeholder=""
           />
         </div>
       </div>
